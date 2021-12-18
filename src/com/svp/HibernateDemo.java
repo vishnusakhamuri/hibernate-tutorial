@@ -6,9 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Main {
+public class HibernateDemo {
 
     public static void main(String[] args) {
 
@@ -21,7 +20,7 @@ public class Main {
         try
         {
             System.out.println("Creating  Student Object/s");
-            ArrayList<Student> list=new ArrayList();
+            ArrayList<Student> list=new ArrayList<>();
             list.add( new Student("Paul","Johnson","paul.johnson@gmail.com"));
             list.add( new Student("Walter","pinto","Walter.pinto@gmail.com"));
             list.add( new Student("John","Mc arthy","John.Mcarthy@gmail.com"));
