@@ -1,5 +1,6 @@
 package com.svp.entity;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="student")
@@ -8,21 +9,7 @@ public class Student {
     public Student()
     {}
 
-    public Student(String firstName, String lastName, String email) {
 
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +38,25 @@ public class Student {
         return lastName;
     }
 
+    public Student(Date creationDate,String firstName, String lastName, String email, Date dateOfBirth ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", creationDate=" + creationDate +
+                '}';
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -68,4 +74,29 @@ public class Student {
 
     @Column(name="email")
     private String email;
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Column(name="date_of_birth")
+    @Temporal( TemporalType.DATE)
+    private Date dateOfBirth;
+
+    @Column(name="creation_date")
+    @Temporal( TemporalType.DATE)
+    private Date creationDate;
+
 }

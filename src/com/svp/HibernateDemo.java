@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HibernateDemo {
@@ -23,9 +24,12 @@ public class HibernateDemo {
         {
             System.out.println("Creating  Student Object/s");
             ArrayList<Student> list=new ArrayList<>();
-            list.add( new Student("Paul","Johnson","paul.johnson@gmail.com"));
-            list.add( new Student("Walter","pinto","Walter.pinto@gmail.com"));
-            list.add( new Student("John","Mc arthy","John.Mcarthy@gmail.com"));
+            list.add( new Student(new Date(),"Paul","Johnson",
+                    "paul.johnson@gmail.com",DateUtils.parseDate("31/12/1998")));
+            list.add( new Student(new Date(),"Walter","pinto",
+                    "Walter.pinto@gmail.com",DateUtils.parseDate("21/6/1975")));
+            list.add( new Student(new Date(),"John","Mc arthy",
+                    "John.Mcarthy@gmail.com",DateUtils.parseDate("16/12/1966")));
             
             
            
@@ -55,7 +59,8 @@ public class HibernateDemo {
             //Retrieve a specific id from Data base
             session =factory.getCurrentSession();
             session.beginTransaction();
-            Student vishnu=new Student("vishnu","gjf","vishnu.gjf@gmail.com");
+            Student vishnu=new Student(new Date(),
+                    "vishnu","gjf","vishnu.gjf@gmail.com",DateUtils.parseDate("16/12/1966"));
             session.save(vishnu);
 
             //Print all the students from the table
