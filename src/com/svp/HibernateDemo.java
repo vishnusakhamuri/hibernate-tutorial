@@ -55,12 +55,31 @@ public class HibernateDemo {
             //Retrieve a specific id from Data base
             session =factory.getCurrentSession();
             session.beginTransaction();
-             //Print all the students from the table
+            Student vishnu=new Student("vishnu","gjf","vishnu.gjf@gmail.com");
+            session.save(vishnu);
+
+            //Print all the students from the table
             System.out.println("##################HQL queries##########################");
+            //Select
             List<Student> studentList=session
                     .createQuery("from Student s where s.lastName='Johnson'")
                     .getResultList();
-            studentList.forEach(b ->  System.out.println(b.toString() + " "+ b.getId()));
+            studentList.forEach(b ->
+                    System.out.println(b.toString() + " Before Changing "+ b.getId()));
+
+            //update
+            studentList.forEach(b -> b.setLastName("Johny"));
+            session.createQuery("update Student set email='paul.Johny@gmail.com' where lastName='Johny'").
+                    executeUpdate();
+            session.getTransaction().commit();
+            studentList.forEach(b -> System.out.println(b.toString() + " " + b.getId()));
+
+            //Delete
+            session =factory.getCurrentSession();
+            session.beginTransaction();
+            session.delete(vishnu);
+            session.createQuery("delete Student where id=17 and email='John.Mcarthy@gmail.com'").executeUpdate();
+            session.getTransaction().commit();
             System.out.println("Completed");
         }catch(Exception e)
         {
